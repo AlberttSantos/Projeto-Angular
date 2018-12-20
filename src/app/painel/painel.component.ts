@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { Frase } from '../shared/frase.model'
+import { FRASES } from './frase-mock'
 
 @Component({
   selector: 'app-painel',
@@ -7,7 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PainelComponent implements OnInit {
 
-  constructor() { }
+  // Recupera as frases contidas em FRASES
+  public frases: Frase[] = FRASES;
+
+  public instrucao: string = 'Traduza a Frase'
+  public resposta: string
+  public rodada: number = 0
+  public rodadaFrase: Frase
+
+  public atualizaResposta(resposta: Event): void {
+    this.resposta = ((<HTMLInputElement>resposta.target).value) // Nescessario "HTMLInputElement" para acesso ao Value
+  }
+
+  public verificarResposta(): void{
+    if(this.rodadaFrase.frasePortuguese == this.resposta){
+      alert("A tradução está correta")
+      //trocar pergunta da rodada
+      this.rodada ++
+      this.rodadaFrase = this.frases[this.rodada]
+      
+    }
+    else{
+      alert("A tradução está incorreta")
+    }
+    
+  }
+
+  constructor() {
+    this.rodadaFrase = this.frases[this.rodada]
+   }
 
   ngOnInit() {
   }
