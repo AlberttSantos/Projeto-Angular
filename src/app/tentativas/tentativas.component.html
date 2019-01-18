@@ -1,5 +1,10 @@
 <!-- Property Binding-->
+<!--
 <img [src]="coracaoCheio">
 <img [src]="coracaoCheio">
 <img [src]="coracaoVazio">
+-->
+
+<!--Cria a variavel coracao e pecorre o array de coracoes-->
+<img *ngFor="let coracao of coracoes" [src] ="coracao.exibeCoracao()"/>
 
